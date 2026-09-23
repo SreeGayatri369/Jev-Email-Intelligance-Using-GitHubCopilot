@@ -1,0 +1,27 @@
+{
+  "name": "jev-email-intelligance-using-githubcopilot",
+  "version": "1.0.0",
+  "description": "A production-oriented frontend workspace for Gmail email intelligence powered by JEV AI. The current build is dependency-free so it can be previewed immediately, with a realistic inbox, live-sync state, JEV result columns, filtering, sorting, search, and bulk selection.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SreeGayatri369/Jev-Email-Intelligance-Using-GitHubCopilot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/SreeGayatri369/Jev-Email-Intelligance-Using-GitHubCopilot/issues"
+  },
+  "homepage": "https://github.com/SreeGayatri369/Jev-Email-Intelligance-Using-GitHubCopilot#readme",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.3",
+    "express": "^5.2.1",
+    "googleapis": "^181.0.0"
+  }
+}

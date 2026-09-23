@@ -1,0 +1,888 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#050807"
+  >
+
+  <meta
+    name="description"
+    content="Real-time Gmail intelligence dashboard powered by JEV AI"
+  >
+
+  <title>JEV Mail Intelligence</title>
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <link
+    rel="stylesheet"
+    href="styles.css"
+  >
+</head>
+
+<body>
+  <div class="app-shell">
+
+    <aside class="sidebar">
+      <div class="brand">
+        <span
+          class="brand-mark"
+          aria-hidden="true"
+        >
+          J
+        </span>
+
+        <span class="brand-name">
+          JEV <strong>Mail</strong>
+        </span>
+      </div>
+
+      <nav
+        class="primary-nav"
+        aria-label="Primary navigation"
+      >
+        <button
+          type="button"
+          class="nav-item active"
+          data-view="Inbox"
+        >
+          <span
+            class="nav-icon"
+            aria-hidden="true"
+          >
+            ▤
+          </span>
+
+          <span class="nav-text">
+            Inbox
+          </span>
+
+          <span
+            class="nav-count"
+            id="sidebar-inbox-count"
+          >
+            0
+          </span>
+        </button>
+
+      </nav>
+
+      <div class="sidebar-bottom">
+        <article class="sync-card">
+          <div class="sync-top">
+            <span
+              class="pulse-dot"
+              id="gmail-pulse"
+              aria-hidden="true"
+            ></span>
+
+            <span id="sync-status-text">
+              Gmail connection
+            </span>
+
+            <span
+              class="live-label"
+              id="live-status-label"
+            >
+              CHECKING
+            </span>
+          </div>
+
+          <p id="sync-description">
+            Checking Gmail connection.
+          </p>
+
+          <div class="sync-time">
+            <span>Last sync</span>
+
+            <strong id="last-sync-time">
+              Not connected
+            </strong>
+          </div>
+        </article>
+
+        <article class="jev-engine-card">
+          <div class="engine-heading">
+            <span
+              class="engine-light"
+              id="jev-engine-light"
+              aria-hidden="true"
+            ></span>
+
+            <strong>JEV Engine</strong>
+          </div>
+
+          <div class="engine-row">
+            <span>Status</span>
+
+            <strong id="jev-engine-status">
+              Connected
+            </strong>
+          </div>
+
+          <div class="engine-row">
+            <span>Model</span>
+
+            <strong id="engine-model">
+              jev-latest
+            </strong>
+          </div>
+
+          <div class="engine-row">
+            <span>Workers</span>
+
+            <strong id="engine-workers">
+              3
+            </strong>
+          </div>
+        </article>
+
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div class="breadcrumbs">
+          <span>Workspace</span>
+          <span>/</span>
+
+          <strong id="page-title">
+            Inbox
+          </strong>
+        </div>
+
+        <div class="top-actions">
+          <button
+            type="button"
+            class="icon-button"
+            id="top-search-button"
+            title="Focus inbox search"
+            aria-label="Focus inbox search"
+          >
+            ⌕
+          </button>
+
+          <button
+            type="button"
+            class="icon-button"
+            title="Notifications"
+            aria-label="Notifications"
+          >
+            ♧
+
+            <span
+              class="notification-dot"
+              aria-hidden="true"
+            ></span>
+          </button>
+
+          <button
+            type="button"
+            class="help-button"
+            title="Help"
+            aria-label="Help"
+          >
+            ?
+          </button>
+        </div>
+      </header>
+
+      <section class="content-wrap">
+        <div class="page-heading">
+          <div>
+            <div class="eyebrow">
+
+              <span
+                class="status-dot"
+                id="page-status-dot"
+                aria-hidden="true"
+              ></span>
+
+              GMAIL INBOX
+
+              <span class="slash">/</span>
+
+              <span id="page-sync-status">
+                CHECKING CONNECTION
+              </span>
+            </div>
+
+            <h1>
+              Mail intelligence
+
+              <span
+                class="wave"
+                aria-hidden="true"
+              >
+                ✦
+              </span>
+            </h1>
+
+            <p>
+              Analyze real Gmail messages using
+              JEV Choice, Score, and Noul questions.
+            </p>
+          </div>
+
+          <button
+            type="button"
+            class="connect-button"
+            id="connect-button"
+          >
+            <span aria-hidden="true">↗</span>
+            Connect Gmail
+          </button>
+        </div>
+
+        <section class="signal-strip" aria-label="Inbox signal summary">
+          <div class="signal-intro">
+            <span class="signal-kicker">TODAY'S SIGNAL</span>
+            <strong>JEV is watching the queue</strong>
+            <span>Prioritizing the conversations most likely to move work forward.</span>
+          </div>
+          <div class="signal-item signal-item-live">
+            <span class="signal-icon">↗</span>
+            <div><strong>Live intake</strong><span>Gmail watch active</span></div>
+            <i></i>
+          </div>
+          <div class="signal-item">
+            <span class="signal-icon signal-icon-purple">✦</span>
+            <div><strong id="signal-question-count">0 questions</strong><span>JEV lens configured</span></div>
+          </div>
+          <div class="signal-item">
+            <span class="signal-icon signal-icon-gold">◆</span>
+            <div><strong id="signal-review-count">0 to review</strong><span>high-priority messages</span></div>
+          </div>
+        </section>
+
+        <div class="metrics-grid">
+          <article class="metric-card">
+            <div class="metric-label">
+              EMAILS LOADED
+
+              <span
+                class="info"
+                title="Real Gmail messages currently loaded"
+              >
+                i
+              </span>
+            </div>
+
+            <div
+              class="metric-value"
+              id="metric-total-emails"
+            >
+              0
+            </div>
+
+            <div class="metric-foot positive">
+              <span aria-hidden="true">↗</span>
+
+              <strong id="metric-sync-state">
+                Waiting
+              </strong>
+
+              <span>Gmail inbox</span>
+            </div>
+
+            <div
+              class="sparkline teal"
+              aria-hidden="true"
+            >
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
+            </div>
+          </article>
+
+          <article class="metric-card">
+            <div class="metric-label">
+              JEV QUESTIONS
+
+              <span
+                class="info"
+                title="Configured Choice, Score, and Noul questions"
+              >
+                i
+              </span>
+            </div>
+
+            <div
+              class="metric-value"
+              id="metric-question-count"
+            >
+              0
+            </div>
+
+            <div class="metric-foot purple-text">
+              <span aria-hidden="true">✦</span>
+
+              <strong id="metric-question-types">
+                None
+              </strong>
+
+              <span>configured</span>
+            </div>
+
+            <div
+              class="sparkline purple"
+              aria-hidden="true"
+            >
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
+            </div>
+          </article>
+
+          <article class="metric-card">
+            <div class="metric-label">
+              ANALYZED EMAILS
+
+              <span
+                class="info"
+                title="Emails containing JEV results"
+              >
+                i
+              </span>
+            </div>
+
+            <div
+              class="metric-value"
+              id="metric-analyzed-emails"
+            >
+              0
+            </div>
+
+            <div class="metric-foot gold-text">
+              <span aria-hidden="true">◆</span>
+
+              <strong id="metric-analysis-rate">
+                0%
+              </strong>
+
+              <span>completed</span>
+            </div>
+
+            <div
+              class="sparkline gold"
+              aria-hidden="true"
+            >
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
+            </div>
+          </article>
+
+          <article class="metric-card">
+            <div class="metric-label">
+              HIGH PRIORITY
+
+              <span
+                class="info"
+                title="Emails with a JEV score of 80 or higher"
+              >
+                i
+              </span>
+            </div>
+
+            <div
+              class="metric-value"
+              id="metric-priority-emails"
+            >
+              0
+            </div>
+
+            <div class="metric-foot warning">
+              <span aria-hidden="true">↑</span>
+
+              <strong id="metric-unread-count">
+                0 unread
+              </strong>
+
+              <span>needs review</span>
+            </div>
+
+            <div
+              class="sparkline coral"
+              aria-hidden="true"
+            >
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
+            </div>
+          </article>
+        </div>
+
+        <section class="inbox-panel">
+          <div class="panel-heading">
+            <div>
+              <h2>
+                Inbox
+
+                <span class="unread-count">
+                  0 unread
+                </span>
+              </h2>
+
+              <p>
+                Real Gmail messages with JEV
+                Choice, Score, and Noul results
+              </p>
+
+              <div
+                class="analysis-progress"
+                id="analysis-progress"
+                role="status"
+              >
+                JEV is preparing the analysis.
+              </div>
+            </div>
+
+            <div class="panel-heading-actions">
+              <button
+                type="button"
+                class="configure-button"
+                id="configure-questions-button"
+              >
+                <span aria-hidden="true">?</span>
+                Configure questions
+              </button>
+
+              <button
+                type="button"
+                class="run-button"
+                id="run-button"
+              >
+                <span aria-hidden="true">✦</span>
+
+                Run analysis
+
+                <span class="shortcut">
+                  Ctrl ↵
+                </span>
+              </button>
+            </div>
+          </div>
+
+          <div class="toolbar">
+            <div
+              class="filter-tabs"
+              role="tablist"
+              aria-label="Inbox filters"
+            >
+              <button
+                type="button"
+                class="filter-tab active"
+                data-filter="all"
+                role="tab"
+              >
+                All
+                <span>0</span>
+              </button>
+
+              <button
+                type="button"
+                class="filter-tab"
+                data-filter="priority"
+                role="tab"
+              >
+                Priority
+                <span>0</span>
+              </button>
+
+              <button
+                type="button"
+                class="filter-tab"
+                data-filter="unread"
+                role="tab"
+              >
+                Unread
+                <span>0</span>
+              </button>
+
+              <button
+                type="button"
+                class="filter-tab"
+                data-filter="lead"
+                role="tab"
+              >
+                Leads
+                <span>0</span>
+              </button>
+            </div>
+
+            <div class="toolbar-right">
+              <label class="search-box">
+                <span aria-hidden="true">⌕</span>
+
+                <input
+                  id="search-input"
+                  type="search"
+                  placeholder="Search sender or subject"
+                  aria-label="Search inbox"
+                  autocomplete="off"
+                >
+              </label>
+
+              <button
+                type="button"
+                class="sort-button"
+                id="sort-button"
+              >
+                Sort:
+
+                <strong>Priority</strong>
+
+                <span aria-hidden="true">⌄</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr id="email-table-header">
+                  <th class="check-col">
+                    <input
+                      type="checkbox"
+                      id="select-all"
+                      aria-label="Select all emails"
+                    >
+                  </th>
+
+                  <th>EMAIL</th>
+                  <th>RECEIVED</th>
+                  <th></th>
+                </tr>
+              </thead>
+
+              <tbody id="email-list"></tbody>
+            </table>
+
+            <div
+              class="empty-state"
+              id="empty-state"
+            >
+              <div
+                class="empty-state-icon"
+                aria-hidden="true"
+              >
+                ✦
+              </div>
+
+              <strong>No emails available</strong>
+
+              <p>
+                Connect Gmail or change the active
+                inbox filter.
+              </p>
+            </div>
+          </div>
+
+          <div class="panel-footer">
+            <span>
+              Showing
+
+              <strong id="showing-count">
+                0
+              </strong>
+
+              emails
+            </span>
+
+            <div
+              class="live-analysis-indicator"
+              id="live-analysis-indicator"
+            >
+              <i aria-hidden="true"></i>
+
+              <span id="live-analysis-text">
+                JEV ready
+              </span>
+            </div>
+
+            <span class="workers">
+              <i aria-hidden="true"></i>
+
+              <span id="worker-count">
+                3 JEV workers
+              </span>
+            </span>
+          </div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <div
+    class="question-overlay"
+    id="question-overlay"
+    aria-hidden="true"
+  >
+    <aside
+      class="question-drawer"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="question-drawer-title"
+    >
+      <div class="question-drawer-header">
+        <div>
+          <div class="drawer-eyebrow">
+            JEV CONFIGURATION
+          </div>
+
+          <h2 id="question-drawer-title">
+            Questions
+          </h2>
+
+          <p>
+            Every saved question becomes a result
+            column in the Inbox table.
+          </p>
+        </div>
+
+        <button
+          type="button"
+          id="close-question-drawer"
+          class="drawer-close"
+          aria-label="Close question settings"
+        >
+          ×
+        </button>
+      </div>
+
+      <section
+        class="jev-type-guide"
+        aria-label="JEV question types"
+      >
+        <div class="type-guide-row">
+          <strong class="type-badge choice">
+            CHOICE
+          </strong>
+
+          <div>
+            <b>Select one configured option</b>
+
+            <span>
+              JEV categorizes each email using
+              your available choices.
+            </span>
+          </div>
+        </div>
+
+        <div class="type-guide-row">
+          <strong class="type-badge score">
+            SCORE
+          </strong>
+
+          <div>
+            <b>Place an email on a scale</b>
+
+            <span>
+              JEV returns a normalized score from
+              0 to 100.
+            </span>
+          </div>
+        </div>
+
+        <div class="type-guide-row">
+          <strong class="type-badge noul">
+            NOUL
+          </strong>
+
+          <div>
+            <b>Return Yes or No</b>
+
+            <span>
+              The Inbox displays Yes or No and the
+              Yes probability.
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <div class="question-toolbar">
+        <div>
+          <strong>Add JEV question</strong>
+
+          <span>
+            Define what JEV should determine for
+            each Gmail message.
+          </span>
+        </div>
+
+        <button
+          type="button"
+          class="clear-question-button"
+          id="clear-question-drafts"
+        >
+          Clear drafts
+        </button>
+      </div>
+
+      <div class="add-question-buttons">
+        <button
+          type="button"
+          class="add-choice-button"
+          data-new-question="choice"
+        >
+          <span aria-hidden="true">●</span>
+          + Choice
+        </button>
+
+        <button
+          type="button"
+          class="add-score-button"
+          data-new-question="score"
+        >
+          <span aria-hidden="true">◆</span>
+          + Score
+        </button>
+
+        <button
+          type="button"
+          class="add-noul-button"
+          data-new-question="noul"
+        >
+          <span aria-hidden="true">▰</span>
+          + Noul
+        </button>
+      </div>
+
+      <div class="question-divider"></div>
+
+      <p
+        class="question-empty-message"
+        id="question-empty-message"
+      >
+        No questions have been configured.
+
+        <span>
+          Add Choice, Score, or Noul to begin.
+        </span>
+      </p>
+
+      <div id="question-list"></div>
+
+      <section class="drawer-engine-section">
+        <div class="drawer-section-title">
+          ENGINE
+        </div>
+
+        <div class="drawer-engine-grid">
+          <div>
+            <label for="drawer-model-id">
+              Model ID
+            </label>
+
+            <input
+              id="drawer-model-id"
+              type="text"
+              value="jev-latest"
+              readonly
+            >
+          </div>
+
+          <div>
+            <label for="drawer-worker-count">
+              Workers
+            </label>
+
+            <input
+              id="drawer-worker-count"
+              type="number"
+              value="3"
+              readonly
+            >
+          </div>
+        </div>
+
+        <p>
+          Model and worker settings are configured
+          securely by the backend.
+        </p>
+      </section>
+
+      <footer class="question-drawer-footer">
+        <span id="question-save-status">
+          Changes are saved to the backend.
+        </span>
+
+        <button
+          type="button"
+          class="close-drawer-button"
+          id="drawer-done-button"
+        >
+          Done
+        </button>
+      </footer>
+    </aside>
+  </div>
+
+  <div
+    class="toast"
+    id="toast"
+    role="status"
+    aria-live="polite"
+  ></div>
+
+  <noscript>
+    <div class="noscript-message">
+      JavaScript is required to load Gmail messages
+      and run JEV analysis.
+    </div>
+  </noscript>
+
+  <script src="app.js"></script>
+</body>
+</html>

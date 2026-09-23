@@ -1,0 +1,47 @@
+[
+  {
+    "id": "choice_50630ed4-c956-4959-b45d-84f7f32503ce",
+    "type": "choice",
+    "name": "social media emails",
+    "instructions": "is it related to any social media like youtube or instagram",
+    "criteria": {
+      "Sales": "Mandatory selection when sender name contains Google or sender email domain contains google.com.",
+      "Also includes sales opportunities, pricing, proposals, contracts, leads, renewals, and purchases.": null,
+      "Google": "this email related to google",
+      "Support": "Product assistance, technical problems, account help, access problems, or implementation support, except emails from Google.",
+      "Internal": "Internal company communication between employees.",
+      "Newsletter": "Marketing, newsletters, promotions, and automated informational content, except emails from Google.",
+      "Other": "Select only when no other option applies.",
+      "Social Media": "if it is related to any social media"
+    },
+    "createdAt": "2026-09-23T05:59:03.626Z",
+    "updatedAt": "2026-09-23T06:45:36.818Z"
+  },
+  {
+    "id": "score_ed0324b4-6eb6-4a5d-8800-5a109968a34b",
+    "type": "score",
+    "name": "google",
+    "instructions": "is it related to any google related question",
+    "criteria": [
+      "Ignore",
+      "Low",
+      "Normal",
+      "High",
+      "Critical"
+    ],
+    "createdAt": "2026-09-23T05:59:38.385Z",
+    "updatedAt": "2026-09-23T06:13:25.272Z"
+  },
+  {
+    "id": "noul_6b5ebc29-ad01-445b-9073-235eed06df8a",
+    "type": "noul",
+    "name": "is it scam or not",
+    "instructions": "Does this email related to scam or not",
+    "criteria": {
+      "true": "it is scam",
+      "false": "it is not scam"
+    },
+    "createdAt": "2026-09-23T05:59:49.096Z",
+    "updatedAt": "2026-09-23T06:30:00.469Z"
+  }
+]
